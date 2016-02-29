@@ -19,6 +19,15 @@ public interface AIOUSB extends StdCallLibrary {
     AIOUSB INSTANCE = (AIOUSB) Native.synchronizedLibrary((AIOUSB) Native.loadLibrary(AIOUSB.class));
 
     /**
+     * unsigned long QueryDeviceInfo(unsigned long DeviceIndex, unsigned long *pPID,
+     *                               unsigned long *pNameSize, char *pName,
+     *                               unsigned long *pDIOBytes, unsigned long *pCounters)
+     */
+    NativeLong QueryDeviceInfo(NativeLong DeviceIndex, NativeLongByReference pPID,
+                               NativeLongByReference pNameSize, ByteByReference pName,
+                               NativeLongByReference pDIOBytes, NativeLongByReference pCounters);
+
+    /**
      * unsigned long ADC_SetConfig(unsigned long DeviceIndex, void *pConfigBuf, unsigned long *ConfigBufSize)
      */
     NativeLong ADC_SetConfig(NativeLong DeviceIndex, Pointer pConfigBuf, NativeLongByReference ConfigBufSize);
@@ -37,15 +46,6 @@ public interface AIOUSB extends StdCallLibrary {
      * unsigned long ADC_GetScanV(unsigned long DeviceIndex, double *pBuf);
      */
     NativeLong ADC_GetScanV(NativeLong DeviceIndex, DoubleByReference pBuf);
-
-    /**
-     * unsigned long QueryDeviceInfo(unsigned long DeviceIndex, unsigned long *pPID,
-     * unsigned long *pNameSize, char *pName,
-     * unsigned long *pDIOBytes, unsigned long *pCounters)
-     */
-    NativeLong QueryDeviceInfo(NativeLong DeviceIndex, NativeLongByReference pPID,
-                               NativeLongByReference pNameSize, ByteByReference pName,
-                               NativeLongByReference pDIOBytes, NativeLongByReference pCounters);
 
     /**
      * unsigned long ADC_GetChannelV(unsigned long DeviceIndex, unsigned long ChannelIndex, double *pBuf)
